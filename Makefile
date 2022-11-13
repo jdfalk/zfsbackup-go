@@ -1,4 +1,4 @@
-TARGETS="freebsd/amd64 linux/amd64"
+TARGETS="freebsd/amd64 linux/amd64 windows/amd64"
 COMMIT_HASH=`git rev-parse --short HEAD 2>/dev/null`
 
 check: lint test test-race

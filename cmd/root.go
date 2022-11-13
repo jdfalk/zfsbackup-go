@@ -360,14 +360,13 @@ func setupGlobalVars() error {
 		}
 	}
 
-	tempdir, err := os.CreateTemp(dirPath, config.ProgramName)
+	tempdir, err := os.MkdirTemp(dirPath, config.ProgramName)
 	if err != nil {
 		log.AppLogger.Errorf("Could not create temp directory due to error - %v", err)
 		return err
 	}
-	defer os.Remove(tempdir.Name()) // clean up
 
-	config.BackupTempdir = tempdir.Name()
+	config.BackupTempdir = tempdir
 	config.WorkingDir = workingDirectory
 
 	dirPath = filepath.Join(workingDirectory, "cache")
