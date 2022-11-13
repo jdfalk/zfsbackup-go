@@ -365,8 +365,9 @@ func setupGlobalVars() error {
 		log.AppLogger.Errorf("Could not create temp directory due to error - %v", err)
 		return err
 	}
+	defer os.Remove(tempdir.Name()) // clean up
 
-	config.BackupTempdir = tempdir
+	config.BackupTempdir = tempdir.Name()
 	config.WorkingDir = workingDirectory
 
 	dirPath = filepath.Join(workingDirectory, "cache")

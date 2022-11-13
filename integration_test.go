@@ -419,7 +419,7 @@ func restoreWrapper(dataset, bucket, target string) func(*testing.T) {
 		if sErr != nil {
 			t.Fatalf("could not create temp scratch dir: %v", sErr)
 		}
-		defer os.RemoveAll(scratchDir)
+		defer os.RemoveAll(scratchDir.Name())
 		defer deleteDataset(t, target)
 
 		cmd.ResetReceiveJobInfo()
@@ -441,7 +441,7 @@ func restoreWrapper(dataset, bucket, target string) func(*testing.T) {
 		cmd.ResetReceiveJobInfo()
 
 		// Restore to latest snapshot @c (auto)
-		cmd.RootCmd.SetArgs([]string{"receive", "--logLevel", logLevel, "--separator", "+", "--workingDirectory", scratchDir, "-F", "--auto", dataset, bucket, target})
+		cmd.RootCmd.SetArgs([]string{"receive", "--logLevel", logLevel, "--separator", "+", "--workingDirectory", scratchDir.Name(), "-F", "--auto", dataset, bucket, target})
 		if err := cmd.RootCmd.ExecuteContext(ctx); err != nil {
 			t.Fatalf("error performing receive: %v", err)
 		}
@@ -470,16 +470,16 @@ func TestEncryptionAndSign(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error preparing temp dir for tests - %v", err)
 	}
-	defer os.RemoveAll(tempDir) // clean up
+	defer os.RemoveAll(tempDir.Name()) // clean up
 
 	scratchDir, err := os.CreateTemp("", "")
 	if err != nil {
 		t.Fatalf("could not create temp scratch dir: %v", err)
 	}
-	defer os.RemoveAll(scratchDir)
+	defer os.RemoveAll(scratchDir.Name())
 
 	var (
-		target     = fmt.Sprintf("file://%s", tempDir)
+		target     = fmt.Sprintf("file://%s", tempDir.Name())
 		user       = "test@example.com"
 		dataset    = fmt.Sprintf("tank/%s", t.Name())
 		newDataset = fmt.Sprintf("tank/%snew", t.Name())
@@ -497,7 +497,7 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Encrypted Backup - Fail no public keyring",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--secretKeyRingPath", "private.pgp", "--encryptTo", user, fmt.Sprintf("%s@a", dataset), target,
 			},
 			true,
@@ -505,7 +505,7 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Signed Backup - Fail no secret keyring",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--publicKeyRingPath", "public.pgp", "--signFrom", user, fmt.Sprintf("%s@a", dataset), target,
 			},
 			true,
@@ -513,7 +513,7 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Manual Full Backup - Encrypted",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--publicKeyRingPath", "public.pgp", "--encryptTo", user, fmt.Sprintf("%s@a", dataset), target,
 			},
 			false,
@@ -521,7 +521,7 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Manual Incremental Backup - Signed",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--secretKeyRingPath", "private.pgp", "--signFrom", user, "-i", fmt.Sprintf("%s@a", dataset), fmt.Sprintf("%s@b", dataset), target,
 			},
 			false,
@@ -529,7 +529,7 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Smart Encrypted Backup - Fail no secret keyring",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--publicKeyRingPath", "public.pgp", "--encryptTo", user, "--increment", dataset, target,
 			},
 			true,
@@ -537,29 +537,29 @@ func TestEncryptionAndSign(t *testing.T) {
 		{
 			"Smart Encrypted & Signed Backup - Success",
 			[]string{
-				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir,
+				"send", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(),
 				"--publicKeyRingPath", "public.pgp", "--secretKeyRingPath", "private.pgp", "--encryptTo", user, "--signFrom", user, "--increment", dataset, target,
 			},
 			false,
 		},
 		{
 			"Restore Failure - No Key Ring",
-			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir, "-F", fmt.Sprintf("%s@a", dataset), target, newDataset},
+			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(), "-F", fmt.Sprintf("%s@a", dataset), target, newDataset},
 			true,
 		},
 		{
 			"Full Restore success - Encrypted",
-			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir, "--secretKeyRingPath", "private.pgp", "--encryptTo", user, "-F", fmt.Sprintf("%s@a", dataset), target, newDataset},
+			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(), "--secretKeyRingPath", "private.pgp", "--encryptTo", user, "-F", fmt.Sprintf("%s@a", dataset), target, newDataset},
 			false,
 		},
 		{
 			"Incremental Restore success - Signed",
-			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir, "--publicKeyRingPath", "public.pgp", "--signFrom", user, "-F", "-i", fmt.Sprintf("%s@a", dataset), fmt.Sprintf("%s@b", dataset), target, newDataset},
+			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(), "--publicKeyRingPath", "public.pgp", "--signFrom", user, "-F", "-i", fmt.Sprintf("%s@a", dataset), fmt.Sprintf("%s@b", dataset), target, newDataset},
 			false,
 		},
 		{
 			"Smart Restore success - Encrypted & Signed",
-			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir, "--publicKeyRingPath", "public.pgp", "--secretKeyRingPath", "private.pgp", "--encryptTo", user, "--signFrom", user, "-F", "--auto", dataset, target, newDataset},
+			[]string{"receive", "--logLevel", logLevel, "--workingDirectory", scratchDir.Name(), "--publicKeyRingPath", "public.pgp", "--secretKeyRingPath", "private.pgp", "--encryptTo", user, "--signFrom", user, "-F", "--auto", dataset, target, newDataset},
 			false,
 		},
 	}
