@@ -31,7 +31,6 @@ import (
 	"hash"
 	"hash/crc32"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -543,7 +542,7 @@ func CreateSimpleVolume(ctx context.Context, pipe bool) (*VolumeInfo, error) {
 			v.r = ratelimit.Reader(v.r, config.BackupUploadBucket)
 		}
 	} else {
-		tempFile, err := ioutil.TempFile(config.BackupTempdir, config.ProgramName)
+		tempFile, err := os.CreateTemp(config.BackupTempdir, config.ProgramName)
 		if err != nil {
 			return nil, err
 		}

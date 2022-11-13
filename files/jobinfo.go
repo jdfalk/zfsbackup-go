@@ -44,6 +44,7 @@ type JobInfo struct {
 	IncrementalSnapshot          SnapshotInfo
 	SnapshotPrefix               string
 	SnapshotRegexp               string
+	Raw                          bool
 	Compressor                   string
 	CompressionLevel             int
 	Separator                    string
@@ -54,6 +55,7 @@ type JobInfo struct {
 	EncryptTo                    string
 	SignFrom                     string
 	Replication                  bool
+	SkipMissing                  bool
 	Deduplication                bool
 	Properties                   bool
 	IntermediaryIncremental      bool
@@ -165,11 +167,11 @@ func (j *JobInfo) TotalBytesStreamedAndVols() (total uint64, volnum int64) {
 // nolint:golint,stylecheck // Error strings used as log messages for user
 func (j *JobInfo) ValidateSendFlags() error {
 	if j.MaxFileBuffer < 0 {
-		return fmt.Errorf("The number of active files must be set to a value greater than or equal to 0. Was given %d", j.MaxFileBuffer)
+		return fmt.Errorf("the number of active files must be set to a value greater than or equal to 0. was given %d", j.MaxFileBuffer)
 	}
 
 	if j.MaxParallelUploads <= 0 {
-		return fmt.Errorf("The number of parallel uploads must be set to a value greater than 0. Was given %d", j.MaxParallelUploads)
+		return fmt.Errorf("the number of parallel uploads must be set to a value greater than 0. was given %d", j.MaxParallelUploads)
 	}
 
 	if j.MaxFileBuffer < j.MaxParallelUploads {
