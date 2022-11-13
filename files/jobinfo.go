@@ -37,28 +37,27 @@ var disallowedSeps = regexp.MustCompile(`^[\w\-:\.]+`) // Disallowed by ZFS
 // JobInfo represents the relevant information for a job that can be used to read
 // in details of that job at a later time.
 type JobInfo struct {
-	StartTime               time.Time
-	EndTime                 time.Time
-	VolumeName              string
-	BaseSnapshot            SnapshotInfo
-	IncrementalSnapshot     SnapshotInfo
-	SnapshotPrefix          string
-	Raw                     bool
-	Compressor              string
-	CompressionLevel        int
-	Separator               string
-	ZFSCommandLine          string
-	ZFSStreamBytes          uint64
-	Volumes                 []*VolumeInfo
-	Version                 float64
-	EncryptTo               string
-	SignFrom                string
-	Replication             bool
-	SkipMissing             bool
-	Deduplication           bool
-	Properties              bool
-	IntermediaryIncremental bool
-	Resume                  bool `json:"-"`
+	StartTime                    time.Time
+	EndTime                      time.Time
+	VolumeName                   string
+	BaseSnapshot                 SnapshotInfo
+	IncrementalSnapshot          SnapshotInfo
+	SnapshotPrefix               string
+	Compressor                   string
+	CompressionLevel             int
+	Separator                    string
+	ZFSCommandLine               string
+	ZFSStreamBytes               uint64
+	Volumes                      []*VolumeInfo
+	Version                      float64
+	EncryptTo                    string
+	SignFrom                     string
+	Replication                  bool
+	Deduplication                bool
+	Properties                   bool
+	IntermediaryIncremental      bool
+	SmartIntermediaryIncremental bool
+	Resume                       bool `json:"-"`
 	// "Smart" Options
 	Full            bool          `json:"-"`
 	Incremental     bool          `json:"-"`
