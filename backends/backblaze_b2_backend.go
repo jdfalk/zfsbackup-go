@@ -30,8 +30,8 @@ import (
 
 	"github.com/kurin/blazer/b2"
 
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 // B2BackendPrefix is the URI prefix used for the B2Backend.

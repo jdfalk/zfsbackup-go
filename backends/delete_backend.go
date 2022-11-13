@@ -25,8 +25,8 @@ import (
 	"errors"
 	"io"
 
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 // DeleteBackendPrefix is the URI prefix used for the DeleteBackend.

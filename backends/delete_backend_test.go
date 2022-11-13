@@ -26,7 +26,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/someone1/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/files"
 )
 
 func TestDeleteGetBackendForURI(t *testing.T) {

@@ -38,7 +38,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager/s3manageriface"
 
-	"github.com/someone1/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/files"
 )
 
 type mockS3Client struct {
