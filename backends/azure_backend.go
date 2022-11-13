@@ -189,7 +189,7 @@ func (a *AzureBackend) Upload(ctx context.Context, vol *files.VolumeInfo) error 
 			case a.conf.MaxParallelUploadBuffer <- true:
 				errg.Go(func() error {
 					defer func() { <-a.conf.MaxParallelUploadBuffer }()
-					_, err := blobURL.StageBlock(ctx, blockID, bytes.NewReader(buf[:n]), azblob.LeaseAccessConditions{}, md5sum[:])
+					_, err := blobURL.StageBlock(ctx, blockID, bytes.NewReader(buf[:n]), azblob.LeaseAccessConditions{}, md5sum[:], azblob.ClientProvidedKeyOptions{})
 					return err
 				})
 			}
@@ -213,7 +213,15 @@ func (a *AzureBackend) Upload(ctx context.Context, vol *files.VolumeInfo) error 
 
 	// Finally, finalize the storage blob by giving Azure the block list order
 	_, err = blobURL.CommitBlockList(
-		ctx, blockIDs, azblob.BlobHTTPHeaders{ContentMD5: md5Raw}, azblob.Metadata{}, azblob.BlobAccessConditions{}, azblob.DefaultAccessTier, azblob.BlobTagsMap{},
+		ctx,
+		blockIDs,
+		azblob.BlobHTTPHeaders{ContentMD5: md5Raw},
+		azblob.Metadata{},
+		azblob.BlobAccessConditions{},
+		azblob.DefaultAccessTier,
+		azblob.BlobTagsMap{},
+		azblob.ClientProvidedKeyOptions{},
+		azblob.ImmutabilityPolicyOptions{},
 	)
 	if err != nil {
 		log.AppLogger.Debugf("azure backend: Error while finalizing volume %s - %v", vol.ObjectName, err)
@@ -236,7 +244,7 @@ func (a *AzureBackend) PreDownload(ctx context.Context, keys []string) error {
 // Download will download the requseted object which can be read from the returned io.ReadCloser
 func (a *AzureBackend) Download(ctx context.Context, name string) (io.ReadCloser, error) {
 	blobURL := a.containerSvc.NewBlobURL(a.prefix + name)
-	resp, err := blobURL.Download(ctx, 0, 0, azblob.BlobAccessConditions{}, false)
+	resp, err := blobURL.Download(ctx, int64(0), int64(0), azblob.BlobAccessConditions{}, false, azblob.ClientProvidedKeyOptions{})
 	if err != nil {
 		return nil, err
 	}

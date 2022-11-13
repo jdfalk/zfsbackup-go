@@ -22,7 +22,6 @@ package backends
 
 import (
 	"context"
-	"io/ioutil"
 	"os"
 	"testing"
 )
@@ -78,7 +77,7 @@ func TestFileBackend(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	tempPath, err := ioutil.TempDir("", t.Name())
+	tempPath, err := os.MkdirTemp("", t.Name())
 	if err != nil {
 		t.Fatalf("could not create temp dir: %v", err)
 	}

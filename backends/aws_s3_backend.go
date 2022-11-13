@@ -174,9 +174,6 @@ func withRequestLimiter(buffer chan bool) request.Option {
 func withComputeMD5HashHandler(ro *request.Request) {
 	ro.Handlers.Build.PushBack(func(r *request.Request) {
 		reader := r.GetBody()
-		if reader == nil {
-			return
-		}
 
 		//nolint:gosec // MD5 not used cryptographically here
 		md5Raw := md5.New()
