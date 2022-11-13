@@ -42,12 +42,12 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/op/go-logging"
 
-	"github.com/someone1/zfsbackup-go/backends"
-	"github.com/someone1/zfsbackup-go/backup"
-	"github.com/someone1/zfsbackup-go/cmd"
-	"github.com/someone1/zfsbackup-go/config"
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/backends"
+	"github.com/jdfalk/zfsbackup-go/backup"
+	"github.com/jdfalk/zfsbackup-go/cmd"
+	"github.com/jdfalk/zfsbackup-go/config"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 const (

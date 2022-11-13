@@ -32,8 +32,8 @@ import (
 	"github.com/cenkalti/backoff"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 // Clean will remove files found in the desination that are not found in any of the manifests found locally or in the destination.

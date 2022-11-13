@@ -30,8 +30,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/someone1/zfsbackup-go/backends"
-	"github.com/someone1/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/backends"
+	"github.com/jdfalk/zfsbackup-go/files"
 )
 
 // Truly a useless backend

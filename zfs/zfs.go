@@ -29,8 +29,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 // ZFSPath is the path to the zfs binary

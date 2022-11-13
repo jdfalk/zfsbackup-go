@@ -23,7 +23,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/someone1/zfsbackup-go/backup"
+	"github.com/jdfalk/zfsbackup-go/backup"
 )
 
 var cleanLocal bool

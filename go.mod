@@ -1,4 +1,4 @@
-module github.com/someone1/zfsbackup-go
+module github.com/jdfalk/zfsbackup-go
 
 go 1.18
 

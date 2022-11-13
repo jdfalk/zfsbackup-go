@@ -1,4 +1,4 @@
-# ZFSBackup [![Build Status](https://travis-ci.org/someone1/zfsbackup-go.svg?branch=master)](https://travis-ci.org/someone1/zfsbackup-go) [![Go Report Card](https://goreportcard.com/badge/github.com/someone1/zfsbackup-go)](https://goreportcard.com/report/github.com/someone1/zfsbackup-go) [![Coverage Status](https://coveralls.io/repos/github/someone1/zfsbackup-go/badge.svg?branch=master)](https://coveralls.io/github/someone1/zfsbackup-go?branch=master)
+# ZFSBackup [![Build Status](https://travis-ci.org/jdfalk/zfsbackup-go.svg?branch=master)](https://travis-ci.org/jdfalk/zfsbackup-go) [![Go Report Card](https://goreportcard.com/badge/github.com/jdfalk/zfsbackup-go)](https://goreportcard.com/report/github.com/jdfalk/zfsbackup-go) [![Coverage Status](https://coveralls.io/repos/github/jdfalk/zfsbackup-go/badge.svg?branch=master)](https://coveralls.io/github/jdfalk/zfsbackup-go?branch=master)
 
 DISCLAIMER: This is a work in progress in still considered beta though I personally use this in a production environment and have tested it for my own use cases (looking for feedback on other people's experience before considering this "production ready").
 
@@ -48,10 +48,10 @@ The PGP algorithm is used for encryption/signing. The cipher used is AES-256.
 
 ## Installation
 
-Download the latest binaries from the [releases](https://github.com/someone1/zfsbackup-go/releases) section or compile your own by:
+Download the latest binaries from the [releases](https://github.com/jdfalk/zfsbackup-go/releases) section or compile your own by:
 
 ```shell
-go get github.com/someone1/zfsbackup-go
+go get github.com/jdfalk/zfsbackup-go
 ```
 
 The compiled binary should be in your $GOPATH/bin directory.

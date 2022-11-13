@@ -23,7 +23,7 @@ package log
 import (
 	"github.com/op/go-logging"
 
-	"github.com/someone1/zfsbackup-go/config"
+	"github.com/jdfalk/zfsbackup-go/config"
 )
 
 // LogModuleName is the module name for our application's logger.

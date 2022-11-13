@@ -27,7 +27,7 @@ import (
 
 	"golang.org/x/crypto/openpgp"
 
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 var (

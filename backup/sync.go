@@ -29,11 +29,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/someone1/zfsbackup-go/backends"
-	"github.com/someone1/zfsbackup-go/config"
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
-	"github.com/someone1/zfsbackup-go/zfs"
+	"github.com/jdfalk/zfsbackup-go/backends"
+	"github.com/jdfalk/zfsbackup-go/config"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/zfs"
 )
 
 func prepareBackend(ctx context.Context, j *files.JobInfo, backendURI string, uploadBuffer chan bool) (backends.Backend, error) {

@@ -30,9 +30,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/someone1/zfsbackup-go/config"
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/config"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
 )
 
 // List will sync the manifests found in the target destination to the local cache

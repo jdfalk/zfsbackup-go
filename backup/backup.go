@@ -42,11 +42,11 @@ import (
 	"github.com/nightlyone/lockfile"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/someone1/zfsbackup-go/backends"
-	"github.com/someone1/zfsbackup-go/config"
-	"github.com/someone1/zfsbackup-go/files"
-	"github.com/someone1/zfsbackup-go/log"
-	"github.com/someone1/zfsbackup-go/zfs"
+	"github.com/jdfalk/zfsbackup-go/backends"
+	"github.com/jdfalk/zfsbackup-go/config"
+	"github.com/jdfalk/zfsbackup-go/files"
+	"github.com/jdfalk/zfsbackup-go/log"
+	"github.com/jdfalk/zfsbackup-go/zfs"
 )
 
 var (

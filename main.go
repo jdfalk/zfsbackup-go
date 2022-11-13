@@ -23,7 +23,7 @@ package main
 import (
 	"context"
 
-	"github.com/someone1/zfsbackup-go/cmd"
+	"github.com/jdfalk/zfsbackup-go/cmd"
 )
 
 func main() {
