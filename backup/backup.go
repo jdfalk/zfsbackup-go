@@ -396,8 +396,6 @@ func Backup(pctx context.Context, jobInfo *files.JobInfo) error {
 				case fileBuffer <- true:
 				}
 			case <-ctx.Done():
-				log.AppLogger.Debugf("manifest copy: ctx.Done(): err = %v", ctx.Err())
-				maniwg.Done()
 				return ctx.Err()
 			}
 		}
