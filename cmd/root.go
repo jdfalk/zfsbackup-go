@@ -24,7 +24,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/user"
 	"path/filepath"
@@ -361,7 +360,7 @@ func setupGlobalVars() error {
 		}
 	}
 
-	tempdir, err := ioutil.TempDir(dirPath, config.ProgramName)
+	tempdir, err := os.CreateTemp(dirPath, config.ProgramName)
 	if err != nil {
 		log.AppLogger.Errorf("Could not create temp directory due to error - %v", err)
 		return err

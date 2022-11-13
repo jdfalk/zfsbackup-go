@@ -25,7 +25,6 @@ import (
 	"context"
 	"crypto/rand"
 	"io"
-	"io/ioutil"
 	"os"
 	"testing"
 	"time"
@@ -43,7 +42,7 @@ func (m *mockBackend) Init(ctx context.Context, conf *backends.BackendConfig, op
 
 func (m *mockBackend) Upload(ctx context.Context, vol *files.VolumeInfo) error {
 	// make sure we can read the volume
-	_, err := ioutil.ReadAll(vol)
+	_, err := io.ReadAll(vol)
 	return err
 }
 

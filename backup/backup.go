@@ -28,7 +28,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -530,7 +529,7 @@ func sendStream(ctx context.Context, j *files.JobInfo, c chan<- *files.VolumeInf
 			// Skip bytes if we are resuming
 			if skipBytes > 0 {
 				log.AppLogger.Debugf("Want to skip %d bytes.", skipBytes)
-				written, serr := io.CopyN(ioutil.Discard, counter, int64(skipBytes))
+				written, serr := io.CopyN(io.Discard, counter, int64(skipBytes))
 				if serr != nil && serr != io.EOF {
 					log.AppLogger.Errorf("Error while trying to read from the zfs stream to skip %d bytes - %v", skipBytes, serr)
 					return serr
