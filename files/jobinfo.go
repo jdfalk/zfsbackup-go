@@ -176,33 +176,33 @@ func (j *JobInfo) ValidateSendFlags() error {
 
 	if j.MaxFileBuffer < j.MaxParallelUploads {
 		log.AppLogger.Warningf(
-			"The number of parallel uploads (%d) is greater than the number of active files allowed (%d), this may result in an unachievable max parallel upload target.", //nolint:lll // Long log output
+			"the number of parallel uploads (%d) is greater than the number of active files allowed (%d), this may result in an unachievable max parallel upload target.", //nolint:lll // Long log output
 			j.MaxParallelUploads,
 			j.MaxFileBuffer,
 		)
 	}
 
 	if j.MaxRetryTime < 0 {
-		return fmt.Errorf("The max retry time must be set to a value greater than or equal to 0. Was given %d", j.MaxRetryTime)
+		return fmt.Errorf("the max retry time must be set to a value greater than or equal to 0. Was given %d", j.MaxRetryTime)
 	}
 
 	if j.MaxBackoffTime <= 0 {
-		return fmt.Errorf("The max backoff time must be set to a value greater than 0. Was given %d", j.MaxBackoffTime)
+		return fmt.Errorf("the max backoff time must be set to a value greater than 0. Was given %d", j.MaxBackoffTime)
 	}
 
 	if j.CompressionLevel < 1 || j.CompressionLevel > 9 {
-		return fmt.Errorf("The compression level specified must be between 1 and 9. Was given %d", j.CompressionLevel)
+		return fmt.Errorf("the compression level specified must be between 1 and 9. Was given %d", j.CompressionLevel)
 	}
 
 	if disallowedSeps.MatchString(j.Separator) {
 		return fmt.Errorf(
-			"The separator provided (%s) should not be used as it can conflict with allowed characters in zfs components",
+			"the separator provided (%s) should not be used as it can conflict with allowed characters in zfs components",
 			j.Separator,
 		)
 	}
 
 	if j.UploadChunkSize < 5 || j.UploadChunkSize > 100 {
-		return fmt.Errorf("The uploadChunkSize provided (%d) is not between 5 and 100", j.UploadChunkSize)
+		return fmt.Errorf("the uploadChunkSize provided (%d) is not between 5 and 100", j.UploadChunkSize)
 	}
 
 	return nil
